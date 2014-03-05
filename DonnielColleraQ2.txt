@@ -1,0 +1,82 @@
+1. on test.html 
+$.get(
+    "/getinfo/111", {},
+    function(data) { $('.InfoDiv').html(data); }
+);
+
+the proper get function whould be like so:
+
+$.get("getinfo.php", {"/getinfo/111"},function(data,status){
+	$('.InfoDiv').html(data);
+});
+
+
+2. test.html: the remarks are wrong for javascript
+
+<!--//
+Get the data using ajax
+//-->
+
+should be 
+//Get the data using ajax
+
+3. for getinfo.php
+parse error: dual ")"
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]));
+
+should be one
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]);
+
+4. also the same thing it will have a notice or warning uwing this line
+
+the correct syntaxt will be with quotes:
+$ArrayURL = explode('/', $_SERVER['REQUEST_URI']);
+
+5. also for getinfo.php
+
+return json_encode( $data->getAll($id) );
+return is not use to return the results
+
+it should be 
+echo json_encode( $data->getAll($id) );
+
+6.  also for getinfo.php
+if (is_object($data) = true) $status = '200 OK';
+it should be
+if (is_object($data)) $status = '200 OK';
+or
+if (is_object($data) ==  true) $status = '200 OK';
+
+7. for getinfo.php
+for getting the end of the uri
+$id = $ArrayURL[1];
+should be to get the last for the ID
+echo $id = end($ArrayURL);
+
+8. for getinfo.php
+its not
+$data = new dataObj();
+it should be 
+$data = new baseObj();
+
+9. for getinfo.php
+this line is now deprecated for php as of 5.3.0 and above
+$ArrayURL = split('/', $_SERVER[REQUEST_URI]));
+rather use this
+$ArrayURL = explode('/', $_SERVER[REQUEST_URI]);
+
+
+10. in test.html
+
+it needs a controller for html for the results
+either use jquery like so:
+obj = jQuery.parseJSON(data);
+or just plain javascript
+obj = JSON.parse(data);
+
+11. also rather using get try to use ajax
+my out put file is based on that
+please take a look at the html file
+
+i deactivated the header section
+and also added "[]" for the results to make it work.

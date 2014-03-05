@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML xmlns:fb="http://www.facebook.com/2008/fbml">
+<HEAD>
+<SCRIPT SRC="http://code.jquery.com/jquery-1.7.2.js"></SCRIPT>
+</HEAD>
+<BODY>
+<H1><FONT FACE="verdana" COLOR="green">Welcome</FONT></H1>
+<CENTER><DIV CLASS="InfoDiv"></DIV></CENTER>
+</BODY>
+<DIV ID="fb-root"></DIV>
+<script type="text/javascript">
+//Get the data using ajax
+$(document).ready (function () {
+	$.get("getinfo.php/1", {},function(data,status){
+		var obj = JSON.parse(data); 
+		var htmlres = "<table><tr><td>ID</td><td>Type</td><td>Title</td><td>Address</td></tr>";
+		$.each(obj, function() {
+			htmlres += "<tr><td>"+this.ID+"</td><td>"+this['Type']+"</td><td>"+this['Title']+"</td><td>"+this['Address']+"</td></tr>";
+		});
+		htmlres += "</table>";
+		$('.InfoDiv').html(htmlres);
+	});
+})
+</script>
+</HTML>
